@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><meta name="baidu-site-verification"><title>JavaScript 几种简单的设计模式 | JsOcean</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.png"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="JsOcean" type="application/atom+xml">
+</head><link rel="stylesheet" type="text/css" href="/plugins/prettify/doxy.css"><script type="text/javascript" src="/js/ready.js" async></script><body class="night"><div class="mobile-head" id="mobile-head"><div class="navbar-icon"><span></span><span></span><span></span></div><div class="navbar-title"><a href="/">LITREILY</a></div><div class="navbar-search"><!--= show a circle here--></div></div><div class="h-wrapper" id="menu"><nav class="h-head box"><div class="m-hdimg"><a class="hdimg img" href="/"><img class="nofancybox" src="/img/profile.jpg" width="128" height="128"></a><h1 class="ttl"><a href="/">JsOcean</a></h1></div><p class="m-desc">人不奋斗,<br>和咸鱼有什么区别！</p><div class="m-nav"><ul><li><span class="dot">●</span><a href="/archives/">归档</a></li><li><span class="dot">●</span><a href="/categories/">分类</a></li><li><span class="dot">●</span><a href="/tags/">标签</a></li><li><span class="dot">●</span><a href="/about/">关于</a></li><li class="m-sch"><form class="form" id="j-formsch" method="get"><input class="txt" type="text" id="local-search-input" name="q" value="搜索" onfocus="if(this.value=='搜索'){this.value='';}" onblur="if(this.value==''){this.value='搜索';}"><input type="text" style="display:none;"></form></li></ul><div id="local-search-result"></div></div></nav></div><div id="back2Top"><a class="fa fa-arrow-up" title="Back to top" href="#"></a></div><div class="box" id="container"><div class="l-wrapper"><div class="l-content box"><div class="l-post l-post-art"><article class="p-art"><div class="p-header box"><h1 class="p-title">JavaScript 几种简单的设计模式</h1><div class="p-info"><span class="p-date"><i class="fa fa-calendar"></i><a href="/2019/04/15/JavaScript-%E5%87%A0%E7%A7%8D%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">2019-04-15</a></span><span class="p-view" id="busuanzi_container_page_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"></span></span></div></div><div class="p-content"><h3 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大家都知道JavaScript设计模式在整个前端占有很重要的地位，它让我们站在巨人的肩膀上，保证我们以优雅的方式组织我们的代码，满足我们解决问题所需要的条件。</p>
+<h3 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个模式就是一个可重用的方案，可应用于在软件设计中的常见问题，它有如下优点：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 模式是行之有效的解决方法：他们提供固定的解决方法来解决在软件开发中出现的问题，这些都是久经考验的反应了开发者的经验和见解的使用模式来定义的技术。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 模式可以很容易地重用：一个模式通常反映了一个可以适应自己需要的开箱即用的解决方案。这个特性让它们很健壮。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. 模式善于表达：当我们看到一个提供某种解决方案的模式时，一般有一组结构和词汇可以非常优雅地帮助表达相当大的解决方案。</p>
+<h3 id="几种JavaScript的设计模式"><a href="#几种JavaScript的设计模式" class="headerlink" title="几种JavaScript的设计模式"></a>几种JavaScript的设计模式</h3><h4 id="JavaScript-构造器模式"><a href="#JavaScript-构造器模式" class="headerlink" title="JavaScript 构造器模式"></a>JavaScript 构造器模式</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在面向对象编程中，构造器是一个当新建对象的内存被分配后，用来初始化该对象的一个特殊函数，在JavaScript中几乎所有的东西都是对象。</p>
+<pre><code class="JavaScript">    /**
+    * 构造一个车的函数 
+    */
+    function car(name, color) {
+        this.name = name;
+        this.color = color;
+        this.getName = function () {
+            return &#39;名称：&#39; + this.name + &#39;\n颜色：&#39; + this.color;
+        }
+    }
+    // 实例一个对象
+    var cat = new car(&#39;凯迪拉克&#39;, &#39;白色&#39;);
+    console.log(cat.getName());</code></pre>
+<h4 id="JavaScript-暴露模块模式"><a href="#JavaScript-暴露模块模式" class="headerlink" title="JavaScript 暴露模块模式"></a>JavaScript 暴露模块模式</h4><pre><code class="JavaScript">    var myRevealingModule = function () {
+
+        var privateVar = &quot;Ben Cherry&quot;,
+            publicVar = &quot;Hey there!&quot;;
+
+        function privateFunction() {
+            console.log(&quot;Name:&quot; + privateVar);
+        }
+
+        function publicSetName(strName) {
+            privateVar = strName;
+            privateFunction();
+        }
+
+        function publicGetName() {
+            privateFunction();
+        }
+
+        return {
+            setName: publicSetName,
+            getName: publicGetName
+        };
+
+    }();
+
+    myRevealingModule.getName(&quot;Paul Kinlan&quot;);</code></pre>
+<h4 id="JavaScript-工厂模式"><a href="#JavaScript-工厂模式" class="headerlink" title="JavaScript 工厂模式"></a>JavaScript 工厂模式</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工厂模式是另外一种关注对象创建概念的创建模式。它的领域中同其它模式的不同之处在于它并没有明确要求我们使用一个构造器。取而代之，一个工厂能提供一个创建对象的公共接口，我们可以在其中指定我们希望被创建的工厂对象的类型。</p>
+<pre><code class="javaScript">
+function car(opts) {
+    var obj = new Object();
+    obj.name = opts.name;
+    obj.color = opts.color;
+    obj.getInfo = function () {
+        return &#39;名称：&#39; + obj.name + &#39;， 颜色：&#39; + obj.color;
+    }
+    return obj;
+}
+var cat = car({ name: &#39;凯迪拉克&#39;, color: &#39;白色&#39; });
+console.log(cat.getInfo());
+</code></pre>
+<h4 id="JavaScript-单例模式"><a href="#JavaScript-单例模式" class="headerlink" title="JavaScript 单例模式"></a>JavaScript 单例模式</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单例就是保证一个类只有一个实例，实现方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。</p>
+<pre><code class="JavaScript">
+var Single = (function () {
+    var instance;
+    function init() {
+        //define private methods and properties
+        //do something
+        return {
+            //define public methods and properties
+        };
+    }
+
+    return {
+        // 获取实例
+        getInstance: function () {
+            if (!instance) {
+                instance = init();
+            }
+            return instance;
+        }
+    }
+})();
+
+var obj1 = Single.getInstance();
+var obj2 = Single.getInstance();
+
+console.log(obj1 === obj2);
+</code></pre>
+<h4 id="JavaScript-原型模式"><a href="#JavaScript-原型模式" class="headerlink" title="JavaScript 原型模式"></a>JavaScript 原型模式</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原型模式，就是创建一个共享的原型，通过拷贝这个原型来创建新的类，用于创建重复的对象，带来性能上的提升。</p>
+<pre><code class="JavaScript">
+var vehiclePrototype = {
+    init: function (carModel) {
+        this.model = carModel;
+    },
+    getModel: function () {
+        console.log(&#39;车辆模具是：&#39; + this.model);
+    }
+
+};
+
+function vehicle(model) {
+    function F() { };
+    F.prototype = vehiclePrototype;    
+    var f = new F();
+    f.init(model);
+    return f;
+}
+var car = vehicle(&#39;法拉利&#39;);
+car.getModel();
+
+</code></pre>
+<h4 id="JavaScript-混合模式"><a href="#JavaScript-混合模式" class="headerlink" title="JavaScript 混合模式"></a>JavaScript 混合模式</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 混合模式是由构造函数模式和原型模式构成，构造函数模式用于定义实例属性，而原型模式用于定义方法和共享属性。每个实例都会有自己的一份实例属性，但同时又共享着方法，最大限度的节省了内存。另外这种模式还支持传递初始参数。这种模式在ECMAScript中是使用最广泛、认同度最高的一种创建自定义对象的方法。</p>
+<pre><code class="JavaScript">// 为父类型创建构造函数
+function SuperType(name) {
+    this.name = name;
+    this.color = [&#39;pink&#39;, &#39;yellow&#39;];
+    this.property = true;
+
+    this.testFun = function () {
+        console.log(&#39;http://tools.jb51.net/&#39;);
+    }
+}
+
+// 为父类型添加方法
+SuperType.prototype.getSuerperValue = function () {
+    return this.property;
+}
+
+// 为子类型创建构造函数
+function SubType(name) {
+    SuperType.call(this, name);
+    this.test = [&#39;h1&#39;, &#39;h2&#39;, &#39;h3&#39;, &#39;h4&#39;];
+    this.subproperty = false;
+}
+
+SubType.prototype = new SuperType();
+
+// 在此处给子类型添加方法，一定要在实现继承之后，否则会在将指针指向父类型的实例，则方法为空
+SubType.prototype.getSubValue = function () {
+    return this.subproperty;
+}
+
+
+/* 以下为测试代码示例 */
+var instance1 = new SubType([&#39;wuyuchang&#39;, &#39;Jack&#39;, &#39;Nick&#39;]);
+instance1.name.push(&#39;hello&#39;);
+instance1.test.push(&#39;h5&#39;);
+instance1.color.push(&#39;blue&#39;);
+instance1.testFun();            // http://tools.jb51.net/
+console.log(instance1.name);            // wuyuchang,Jack,Nick,hello
+console.log(instance1.getSuerperValue());      // true
+console.log(instance1.test);            // h1,h2,h3,h4,h5    
+console.log(instance1.getSubValue());        // false    
+console.log(instance1.color);            // pink,yellow,blue
+
+var instance2 = new SubType(&#39;wyc&#39;);
+instance2.testFun();            // http://tools.jb51.net/
+console.log(instance2.name);            // wyc    
+console.log(instance2.getSuerperValue());      // true
+console.log(instance2.test);            // h1,h2,h3,h4
+console.log(instance2.getSubValue());        // false
+console.log(instance2.color);            // pink,yellow
+</code></pre>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 看了上面的一些示例，应该对JavaScript设计模式有了一些了解，设计模式有很多种类，我这边只是写了简单常用的几种模式，希望对你有所帮助。</p>
+</div><div class="p-copyright"><blockquote><div class="p-copyright-author"><span class="p-copyright-key">本文作者：</span><span class="p-copytight-value"><a href="mailto:litreily@163.com">JsOcean</a></span></div><div class="p-copyright-link"><span class="p-copyright-key">本文链接：</span><span class="p-copytight-value"><a href="/2019/04/15/JavaScript-%E5%87%A0%E7%A7%8D%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">http://yoursite.com/2019/04/15/JavaScript-几种简单的设计模式/</a></span></div><div class="p-copyright-note"><span class="p-copyright-key">版权声明：</span><span class="p-copytight-value">本博客所有文章除特殊声明外，均采用<a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/"> CC BY-NC 4.0 </a>许可协议。转载请注明出处 <a href="http://yoursite.com">JsOcean的博客</a>！</span></div></blockquote></div></article><div class="p-info box"><span class="p-tags"><i class="fa fa-tags"></i><a href="/tags/JavaScript/">JavaScript</a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span></div><aside id="toc"><div class="toc-title">目录</div><nav><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#序言"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是设计模式"><span class="toc-number">2.</span> <span class="toc-text">什么是设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#几种JavaScript的设计模式"><span class="toc-number">3.</span> <span class="toc-text">几种JavaScript的设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-构造器模式"><span class="toc-number">3.1.</span> <span class="toc-text">JavaScript 构造器模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-暴露模块模式"><span class="toc-number">3.2.</span> <span class="toc-text">JavaScript 暴露模块模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-工厂模式"><span class="toc-number">3.3.</span> <span class="toc-text">JavaScript 工厂模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-单例模式"><span class="toc-number">3.4.</span> <span class="toc-text">JavaScript 单例模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-原型模式"><span class="toc-number">3.5.</span> <span class="toc-text">JavaScript 原型模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-混合模式"><span class="toc-number">3.6.</span> <span class="toc-text">JavaScript 混合模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li></ol></nav></aside></div><section class="p-ext"><div class="l-pager l-pager-dtl box"><a class="next" href="/2019/03/27/webpack%E5%85%A5%E9%97%A8%E7%BA%A7%E7%AF%87%E7%AB%A0%EF%BC%8C%E7%9C%8B%E8%BF%99%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/">webpack入门级篇章，看这篇就够了 &gt;</a></div><div id="valine-comment"><style type="text/css">.night .v[data-class=v] a { color: #0F9FB4 !important; }
+.night .v[data-class=v] a:hover { color: #216C73 !important; }
+.night .v[data-class=v] li { list-style: inherit; }
+.night .v[data-class=v] .vwrap { border: 1px solid #223441; border-radius: 0; }
+.night .v[data-class=v] .vwrap:hover { box-shadow: 0 0 6px 1px #223441; }
+.night .v[data-class=v] .vbtn { border-radius: 0; background: none; }
+.night .v[data-class=v] .vlist .vcard .vh { border-bottom-color: #293D4E; }
+.night .v[data-class=v] .vwrap .vheader .vinput { border-bottom-color: #223441; }
+.night .v[data-class=v] .vwrap .vheader .vinput:focus { border-bottom-color: #339EB4; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre,.night .v[data-class=v] .vlist .vcard .vhead .vsys { background: #203240 !important; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre { color: #F0F0F0; font-size: 95%; }
+.v[data-class=v] .vcards .vcard .vh {border-bottom-color: #223441; }
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:before {background: linear-gradient(180deg,rgba(38,57,73,.4),rgba(38,57,73,.9));}
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:after {background: rgba(38,57,73,.9)}
+</style><div id="vcomment"></div><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'',
+  appKey:'',
+  lang: 'zh-cn',
+  placeholder:'请填写你的疑问......',
+  avatar:'wavatar',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></section><footer><p>Copyright © 2016 - 2020 <a href="/." rel="nofollow">JsOcean</a> | <strong><a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></strong><br><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span></span> <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a>Theme with<a rel="nofollow" target="_blank" href="https://github.com/litreily/snark-hexo"> snark.</a></p></footer></div></div></div><script type="text/javascript" src="/plugins/prettify/prettify.js"></script><script type="text/javascript" src="/js/search.js"></script><script type="text/javascript" src="/js/top.js"></script><script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+    search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"></body></html>
