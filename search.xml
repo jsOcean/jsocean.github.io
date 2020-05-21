@@ -35,9 +35,9 @@
       
         <tags>
             
-            <tag> webpack </tag>
-            
             <tag> JavaScript </tag>
+            
+            <tag> webpack </tag>
             
             <tag> 自动化打包 </tag>
             
@@ -56,6 +56,12 @@
       
         <content type="html"><![CDATA[<h3 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这几天我的同事分享一篇前端发展的简史，并提到了前后端分离这样的一种概念，我想对于目前的web来说，前后端的分离已经变得越来越流行，也是以后web发展的一种趋势，而这篇文章也是我对前后端分离的一些个人的想法。</p><h3 id="为什么选择前后端分离"><a href="#为什么选择前后端分离" class="headerlink" title="为什么选择前后端分离"></a>为什么选择前后端分离</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传统的前端就是拿到设计图，然后切图，用html，css，js写成demo的页面，然后交给后台的人员，后台的人员去实现数据的交互，如果显示问题，又交给前台去修改等等问题，都需要前后端时刻的去配合完成，甚至有些后台人员要兼顾前端的工作，一边写着后台的接口，一边要拼接url的动态的地址，这也就暴露出了很多的问题，前后端的工作分配不均，开发的效率慢，代码难以维护等。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前后端分离的根本思想就是把数据和页面分离，前后端之间约定好json的数据格式，后台就专注自己的逻辑，提供相应的接口；前端开发人员则可以利用webpack或者nodejs来搭建自己的本地服务器，直接在本地开发。两者都可以同时开工，不互相依赖，开发效率更快，而且分工比较均衡。<br><img src="https://s2.ax1x.com/2019/03/24/AY5KK0.png" alt="前后代码分离模式"></p><h3 id="前后端分离以后的开发模式"><a href="#前后端分离以后的开发模式" class="headerlink" title="前后端分离以后的开发模式"></a>前后端分离以后的开发模式</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前后端分离以后，整个的流程更加的清晰，双方各不干扰，如下图所示：<br><img src="https://s2.ax1x.com/2019/03/24/AY5m2n.png" alt="前后开发模式"></p><h3 id="前后端数据接口的规范流程"><a href="#前后端数据接口的规范流程" class="headerlink" title="前后端数据接口的规范流程"></a>前后端数据接口的规范流程</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中可以了解到，前后端是并行开发，但是具体是怎样的流程呢，如下图</p><p><img src="https://s2.ax1x.com/2019/03/24/AY5nvq.png" alt="前后开发模式"></p><h3 id="个人心得与体会"><a href="#个人心得与体会" class="headerlink" title="个人心得与体会"></a>个人心得与体会</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前后端分离以后，确实是方便了很多，以前由后台控制路由、后台渲染页面到现在的前端控制路由、前端渲染数据，工作流程和方式都发生了很大的变化，思想发生了很大的变化：</p><ul><li>彻底的解放了前端的开发</li><li>再也不需要后台给我配置服务器了</li><li>提高了整个项目的开发效率</li><li>页面跳转更快，局部渲染加载速度快很多</li><li>页面模板可以重复的使用，前端组件化开发提高了开发效率</li><li>降低了项目的维护的成本</li></ul><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前后端分离的开发模式与传统模式相比，让我们有规划地打造一个前后端并重的精益开发 团队，更好地应对越来越复杂多变的Web应用开发需求。</p>]]></content>
       
+      
+      <categories>
+          
+          <category> JavaScript </category>
+          
+      </categories>
       
       
         <tags>
